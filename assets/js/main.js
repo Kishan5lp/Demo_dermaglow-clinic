@@ -672,3 +672,183 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+/* =========================================================
+   PROCEDURE BODY MAP
+========================================================= */
+
+/* =========================================================
+   DERMAGLOW PROCEDURE IMAGE SWITCH
+   FOR HIM / FOR HER
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const image =
+        document.getElementById("dgProcedureImage");
+
+    const buttons =
+        document.querySelectorAll(".dg-gender-tab");
+
+
+    if (!image || !buttons.length) {
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       IMAGE PATHS
+    ===================================================== */
+
+    const procedureImages = {
+
+        male:
+            "assets/images/before-after/him.png",
+
+        female:
+            "assets/images/before-after/her.png"
+
+    };
+
+
+
+    /* =====================================================
+       ALT TEXT
+    ===================================================== */
+
+    const imageAlt = {
+
+        male:
+            "Men dermatology procedures",
+
+        female:
+            "Women dermatology procedures"
+
+    };
+
+
+
+    /* =====================================================
+       CHANGE IMAGE
+    ===================================================== */
+
+    function changeProcedureGender(gender) {
+
+
+        /* -----------------------------------------------
+           BUTTON ACTIVE STATE
+        ------------------------------------------------ */
+
+        buttons.forEach(function (button) {
+
+            button.classList.remove("active");
+
+        });
+
+
+        const selectedButton =
+            document.querySelector(
+                '.dg-gender-tab[data-gender="' +
+                gender +
+                '"]'
+            );
+
+
+        if (selectedButton) {
+
+            selectedButton.classList.add("active");
+
+        }
+
+
+
+        /* -----------------------------------------------
+           IMAGE FADE OUT
+        ------------------------------------------------ */
+
+        image.classList.add("dg-changing");
+
+
+
+        /* -----------------------------------------------
+           CHANGE IMAGE
+        ------------------------------------------------ */
+
+        setTimeout(function () {
+
+            image.src =
+                procedureImages[gender];
+
+            image.alt =
+                imageAlt[gender];
+
+
+            /*
+             * Wait until image loads
+             */
+
+            image.onload = function () {
+
+                image.classList.remove(
+                    "dg-changing"
+                );
+
+            };
+
+
+            /*
+             * Cached image fallback
+             */
+
+            setTimeout(function () {
+
+                image.classList.remove(
+                    "dg-changing"
+                );
+
+            }, 450);
+
+
+        }, 180);
+
+    }
+
+
+
+    /* =====================================================
+       BUTTON CLICK
+    ===================================================== */
+
+    buttons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const gender =
+                    this.getAttribute(
+                        "data-gender"
+                    );
+
+
+                changeProcedureGender(
+                    gender
+                );
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       INITIAL
+       FOR HIM
+    ===================================================== */
+
+    changeProcedureGender("male");
+
+});

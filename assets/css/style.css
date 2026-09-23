@@ -3580,3 +3580,542 @@ p {
     }
 
 }
+/* =========================================================
+   DERMAGLOW
+   PROCEDURE SECTION
+   NEW TOUCH STYLE GENDER SWITCH
+   FULL RESPONSIVE
+========================================================= */
+
+
+/* =========================================================
+   MAIN SECTION
+========================================================= */
+
+.dg-procedures {
+
+    width: 100%;
+
+    padding: 70px 20px 90px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+.dg-procedures *,
+.dg-procedures *::before,
+.dg-procedures *::after {
+
+    box-sizing: border-box;
+}
+
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.dg-procedures-container {
+
+    width: 100%;
+
+    max-width: 1700px;
+
+    margin: 0 auto;
+
+}
+
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.dg-procedures-heading {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.dg-procedures-subtitle {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: #a56f57;
+
+}
+
+
+.dg-procedures-heading h2 {
+
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(32px, 4vw, 50px);
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+    color: #143d39;
+
+}
+
+
+
+/* =========================================================
+   GENDER TABS
+========================================================= */
+
+.dg-gender-tabs {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 6px;
+
+    width: max-content;
+
+    max-width: 100%;
+
+    margin: 0 auto 35px;
+
+    padding: 5px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddd4ce;
+
+    border-radius: 50px;
+
+    box-shadow:
+        0 8px 25px rgba(30,25,20,.08);
+
+}
+
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.dg-gender-tab {
+
+    position: relative;
+
+    min-width: 115px;
+
+    padding: 11px 28px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    background: transparent;
+
+    color: #66716e;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.dg-gender-tab:hover {
+
+    color: #143d39;
+
+}
+
+
+.dg-gender-tab.active {
+
+    background: #143d39;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 15px rgba(20,61,57,.20);
+
+}
+
+
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.dg-procedure-image-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1700px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 4px;
+
+}
+
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.dg-procedure-image {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-width: 100%;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    border: none;
+
+    outline: none;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    opacity: 1;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+
+
+/* =========================================================
+   IMAGE CHANGE ANIMATION
+========================================================= */
+
+.dg-procedure-image.dg-changing {
+
+    opacity: 0;
+
+    transform: scale(.985);
+
+}
+
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1400px) {
+
+    .dg-procedures {
+
+        padding-left: 30px;
+
+        padding-right: 30px;
+
+    }
+
+
+    .dg-procedure-image-wrapper {
+
+        max-width: 1750px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .dg-procedures {
+
+        padding-top: 60px;
+
+        padding-bottom: 70px;
+
+    }
+
+
+    .dg-procedure-image-wrapper {
+
+        max-width: 1150px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .dg-procedures {
+
+        padding: 50px 15px 60px;
+
+    }
+
+
+    .dg-procedures-heading {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .dg-gender-tabs {
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .dg-procedure-image-wrapper {
+
+        width: 100%;
+
+    }
+
+
+    .dg-procedure-image {
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dg-procedures {
+
+        padding: 40px 10px 50px;
+
+    }
+
+
+    .dg-procedures-heading {
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .dg-procedures-subtitle {
+
+        font-size: 10px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .dg-procedures-heading h2 {
+
+        font-size: 32px;
+
+    }
+
+
+    .dg-gender-tabs {
+
+        margin-bottom: 20px;
+
+        padding: 4px;
+
+    }
+
+
+    .dg-gender-tab {
+
+        min-width: 105px;
+
+        padding: 10px 20px;
+
+        font-size: 13px;
+
+    }
+
+
+    .dg-procedure-image-wrapper {
+
+        width: 100%;
+
+        overflow: hidden;
+
+    }
+
+
+    .dg-procedure-image {
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .dg-procedures {
+
+        padding: 32px 5px 40px;
+
+    }
+
+
+    .dg-procedures-heading h2 {
+
+        font-size: 28px;
+
+    }
+
+
+    .dg-gender-tabs {
+
+        width: 100%;
+
+        max-width: 280px;
+
+    }
+
+
+    .dg-gender-tab {
+
+        flex: 1;
+
+        min-width: 0;
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .dg-procedure-image-wrapper {
+
+        width: 100%;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .dg-procedures-heading h2 {
+
+        font-size: 25px;
+
+    }
+
+
+    .dg-gender-tab {
+
+        font-size: 11px;
+
+        padding: 8px 10px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .dg-procedure-image,
+    .dg-gender-tab {
+
+        transition: none;
+
+    }
+
+}
