@@ -152,229 +152,523 @@ window.addEventListener("scroll", function () {
    AUTO CURSOR + TOUCH CONTROL
 ========================================================= */
 
+// document.addEventListener("DOMContentLoaded", function () {
+
+//     const comparison =
+//         document.getElementById("baComparison");
+
+//     const divider =
+//         document.getElementById("baDivider");
+
+//     if (!comparison || !divider) {
+//         return;
+//     }
+
+
+//     /* =====================================================
+//        POSITION
+//     ===================================================== */
+
+//     let targetPosition = 50;
+//     let currentPosition = 50;
+
+
+//     /* =====================================================
+//        CLAMP
+//     ===================================================== */
+
+//     function clamp(value, min, max) {
+
+//         return Math.max(
+//             min,
+//             Math.min(max, value)
+//         );
+
+//     }
+
+
+//     /* =====================================================
+//        GET POSITION
+//     ===================================================== */
+
+//     function getPosition(clientX) {
+
+//         const rect =
+//             comparison.getBoundingClientRect();
+
+//         if (!rect.width) {
+//             return 50;
+//         }
+
+//         const position =
+//             ((clientX - rect.left) / rect.width) * 100;
+
+//         return clamp(position, 0, 100);
+
+//     }
+
+
+//     /* =====================================================
+//        SET TARGET
+//     ===================================================== */
+
+//     function setPosition(position) {
+
+//         targetPosition =
+//             clamp(position, 0, 100);
+
+//     }
+
+
+//     /* =====================================================
+//        SMOOTH ANIMATION
+//     ===================================================== */
+
+//     function animate() {
+
+//         const difference =
+//             targetPosition - currentPosition;
+
+
+//         currentPosition +=
+//             difference * 0.16;
+
+
+//         if (Math.abs(difference) < 0.01) {
+
+//             currentPosition =
+//                 targetPosition;
+
+//         }
+
+
+//         /*
+//          * IMPORTANT:
+//          * Only update CSS variable.
+//          *
+//          * DO NOT change image width.
+//          */
+
+//         comparison.style.setProperty(
+//             "--position",
+//             currentPosition + "%"
+//         );
+
+
+//         requestAnimationFrame(animate);
+
+//     }
+
+
+//     /* =====================================================
+//        MOUSE MOVE
+//     ===================================================== */
+
+//     comparison.addEventListener(
+//         "mousemove",
+//         function (event) {
+
+//             setPosition(
+//                 getPosition(event.clientX)
+//             );
+
+//         }
+//     );
+
+
+//     /* =====================================================
+//        MOUSE ENTER
+//     ===================================================== */
+
+//     comparison.addEventListener(
+//         "mouseenter",
+//         function (event) {
+
+//             setPosition(
+//                 getPosition(event.clientX)
+//             );
+
+//         }
+//     );
+
+
+//     /* =====================================================
+//        MOUSE LEAVE
+//        RETURN TO EXACT CENTER
+//     ===================================================== */
+
+//     comparison.addEventListener(
+//         "mouseleave",
+//         function () {
+
+//             setPosition(50);
+
+//         }
+//     );
+
+
+//     /* =====================================================
+//        TOUCH START
+//     ===================================================== */
+
+//     comparison.addEventListener(
+//         "touchstart",
+//         function (event) {
+
+//             if (!event.touches.length) {
+//                 return;
+//             }
+
+//             setPosition(
+//                 getPosition(
+//                     event.touches[0].clientX
+//                 )
+//             );
+
+//         },
+//         {
+//             passive: true
+//         }
+//     );
+
+
+//     /* =====================================================
+//        TOUCH MOVE
+//     ===================================================== */
+
+//     comparison.addEventListener(
+//         "touchmove",
+//         function (event) {
+
+//             if (!event.touches.length) {
+//                 return;
+//             }
+
+//             setPosition(
+//                 getPosition(
+//                     event.touches[0].clientX
+//                 )
+//             );
+
+//         },
+//         {
+//             passive: true
+//         }
+//     );
+
+
+//     /* =====================================================
+//        INITIAL POSITION
+//        ALWAYS 50 / 50
+//     ===================================================== */
+
+//     currentPosition = 50;
+//     targetPosition = 50;
+
+//     comparison.style.setProperty(
+//         "--position",
+//         "50%"
+//     );
+
+
+//     /* =====================================================
+//        START
+//     ===================================================== */
+
+//     requestAnimationFrame(animate);
+
+// });
+
+/* =========================================================
+   PROFESSIONAL BEFORE / AFTER
+   MULTIPLE COMPARISONS
+   LABELS FOLLOW CURSOR POSITION
+========================================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const comparison =
-        document.getElementById("baComparison");
+    document.querySelectorAll(".ba-comparison").forEach(function (comparison) {
 
-    const divider =
-        document.getElementById("baDivider");
-
-    if (!comparison || !divider) {
-        return;
-    }
+        let targetPosition = 50;
+        let currentPosition = 50;
 
 
-    /* =====================================================
-       POSITION
-    ===================================================== */
+        /* =============================================
+           CLAMP
+        ============================================= */
 
-    let targetPosition = 50;
-    let currentPosition = 50;
+        function clamp(value, min, max) {
+
+            return Math.max(
+                min,
+                Math.min(max, value)
+            );
+
+        }
 
 
-    /* =====================================================
-       CLAMP
-    ===================================================== */
+        /* =============================================
+           GET POSITION
+        ============================================= */
 
-    function clamp(value, min, max) {
+        function getPosition(clientX) {
 
-        return Math.max(
-            min,
-            Math.min(max, value)
+            const rect =
+                comparison.getBoundingClientRect();
+
+            if (!rect.width) {
+                return 50;
+            }
+
+            const position =
+                ((clientX - rect.left) / rect.width) * 100;
+
+            return clamp(position, 0, 100);
+
+        }
+
+
+        /* =============================================
+           UPDATE LABELS
+        ============================================= */
+
+        function updateLabels(position) {
+
+            /*
+             * LEFT SIDE
+             * Show BEFORE
+             */
+
+            if (position < 43) {
+
+                comparison.classList.remove("show-after");
+                comparison.classList.remove("show-center");
+
+                comparison.classList.add("show-before");
+
+            }
+
+
+            /*
+             * CENTER
+             * Show BOTH
+             */
+
+            else if (position >= 43 && position <= 57) {
+
+                comparison.classList.remove("show-before");
+                comparison.classList.remove("show-after");
+
+                comparison.classList.add("show-center");
+
+            }
+
+
+            /*
+             * RIGHT SIDE
+             * Show AFTER
+             */
+
+            else {
+
+                comparison.classList.remove("show-before");
+                comparison.classList.remove("show-center");
+
+                comparison.classList.add("show-after");
+
+            }
+
+        }
+
+
+        /* =============================================
+           SET POSITION
+        ============================================= */
+
+        function setPosition(position) {
+
+            targetPosition =
+                clamp(position, 0, 100);
+
+        }
+
+
+        /* =============================================
+           SMOOTH ANIMATION
+        ============================================= */
+
+        function animate() {
+
+            const difference =
+                targetPosition - currentPosition;
+
+
+            currentPosition +=
+                difference * 0.18;
+
+
+            if (Math.abs(difference) < 0.01) {
+
+                currentPosition =
+                    targetPosition;
+
+            }
+
+
+            /*
+             * Update slider
+             */
+
+            comparison.style.setProperty(
+                "--position",
+                currentPosition + "%"
+            );
+
+
+            /*
+             * Update labels
+             */
+
+            updateLabels(currentPosition);
+
+
+            requestAnimationFrame(animate);
+
+        }
+
+
+        /* =============================================
+           MOUSE MOVE
+        ============================================= */
+
+        comparison.addEventListener(
+            "mousemove",
+            function (event) {
+
+                setPosition(
+                    getPosition(event.clientX)
+                );
+
+            }
         );
 
-    }
+
+        /* =============================================
+           MOUSE ENTER
+        ============================================= */
+
+        comparison.addEventListener(
+            "mouseenter",
+            function (event) {
+
+                setPosition(
+                    getPosition(event.clientX)
+                );
+
+            }
+        );
 
 
-    /* =====================================================
-       GET POSITION
-    ===================================================== */
+        /* =============================================
+           MOUSE LEAVE
+           RETURN TO CENTER
+        ============================================= */
 
-    function getPosition(clientX) {
+        comparison.addEventListener(
+            "mouseleave",
+            function () {
 
-        const rect =
-            comparison.getBoundingClientRect();
+                setPosition(50);
 
-        if (!rect.width) {
-            return 50;
-        }
-
-        const position =
-            ((clientX - rect.left) / rect.width) * 100;
-
-        return clamp(position, 0, 100);
-
-    }
+            }
+        );
 
 
-    /* =====================================================
-       SET TARGET
-    ===================================================== */
+        /* =============================================
+           TOUCH START
+        ============================================= */
 
-    function setPosition(position) {
+        comparison.addEventListener(
+            "touchstart",
+            function (event) {
 
-        targetPosition =
-            clamp(position, 0, 100);
+                if (!event.touches.length) {
+                    return;
+                }
 
-    }
+                setPosition(
+                    getPosition(
+                        event.touches[0].clientX
+                    )
+                );
 
-
-    /* =====================================================
-       SMOOTH ANIMATION
-    ===================================================== */
-
-    function animate() {
-
-        const difference =
-            targetPosition - currentPosition;
-
-
-        currentPosition +=
-            difference * 0.16;
-
-
-        if (Math.abs(difference) < 0.01) {
-
-            currentPosition =
-                targetPosition;
-
-        }
+            },
+            {
+                passive: true
+            }
+        );
 
 
-        /*
-         * IMPORTANT:
-         * Only update CSS variable.
-         *
-         * DO NOT change image width.
-         */
+        /* =============================================
+           TOUCH MOVE
+        ============================================= */
+
+        comparison.addEventListener(
+            "touchmove",
+            function (event) {
+
+                if (!event.touches.length) {
+                    return;
+                }
+
+                setPosition(
+                    getPosition(
+                        event.touches[0].clientX
+                    )
+                );
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        /* =============================================
+           CLICK / TAP
+        ============================================= */
+
+        comparison.addEventListener(
+            "click",
+            function (event) {
+
+                setPosition(
+                    getPosition(event.clientX)
+                );
+
+            }
+        );
+
+
+        /* =============================================
+           INITIAL
+        ============================================= */
 
         comparison.style.setProperty(
             "--position",
-            currentPosition + "%"
+            "50%"
         );
 
+        comparison.classList.add("show-center");
+
+
+        /* =============================================
+           START
+        ============================================= */
 
         requestAnimationFrame(animate);
 
-    }
-
-
-    /* =====================================================
-       MOUSE MOVE
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mousemove",
-        function (event) {
-
-            setPosition(
-                getPosition(event.clientX)
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       MOUSE ENTER
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mouseenter",
-        function (event) {
-
-            setPosition(
-                getPosition(event.clientX)
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       MOUSE LEAVE
-       RETURN TO EXACT CENTER
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mouseleave",
-        function () {
-
-            setPosition(50);
-
-        }
-    );
-
-
-    /* =====================================================
-       TOUCH START
-    ===================================================== */
-
-    comparison.addEventListener(
-        "touchstart",
-        function (event) {
-
-            if (!event.touches.length) {
-                return;
-            }
-
-            setPosition(
-                getPosition(
-                    event.touches[0].clientX
-                )
-            );
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    /* =====================================================
-       TOUCH MOVE
-    ===================================================== */
-
-    comparison.addEventListener(
-        "touchmove",
-        function (event) {
-
-            if (!event.touches.length) {
-                return;
-            }
-
-            setPosition(
-                getPosition(
-                    event.touches[0].clientX
-                )
-            );
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    /* =====================================================
-       INITIAL POSITION
-       ALWAYS 50 / 50
-    ===================================================== */
-
-    currentPosition = 50;
-    targetPosition = 50;
-
-    comparison.style.setProperty(
-        "--position",
-        "50%"
-    );
-
-
-    /* =====================================================
-       START
-    ===================================================== */
-
-    requestAnimationFrame(animate);
+    });
 
 });
+
