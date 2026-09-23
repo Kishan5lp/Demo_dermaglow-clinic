@@ -146,8 +146,10 @@ window.addEventListener("scroll", function () {
     }
 
 });
+
 /* =========================================================
-   PROFESSIONAL BEFORE / AFTER AUTO CURSOR CONTROL
+   PROFESSIONAL BEFORE / AFTER
+   AUTO CURSOR + TOUCH CONTROL
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -155,244 +157,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const comparison =
         document.getElementById("baComparison");
 
-    const after =
-        document.getElementById("baAfter");
-
     const divider =
         document.getElementById("baDivider");
 
-
-    if (!comparison || !after || !divider) {
+    if (!comparison || !divider) {
         return;
     }
 
 
-    let animationFrame = null;
+    /* =====================================================
+       POSITION
+    ===================================================== */
 
     let targetPosition = 50;
-
     let currentPosition = 50;
 
 
     /* =====================================================
-       SET POSITION
-    ===================================================== */
-
-    function setPosition(position) {
-
-        targetPosition =
-            Math.max(
-                0,
-                Math.min(100, position)
-            );
-
-    }
-
-
-    /* =====================================================
-       ANIMATION
-    ===================================================== */
-
-    function animate() {
-
-        /*
-         * Smooth movement
-         */
-
-        currentPosition +=
-            (targetPosition - currentPosition) * 0.16;
-
-
-        /*
-         * AFTER width
-         */
-
-        after.style.width =
-            currentPosition + "%";
-
-
-        /*
-         * CENTER LINE
-         */
-
-        divider.style.left =
-            currentPosition + "%";
-
-
-        /*
-         * Continue animation
-         */
-
-        animationFrame =
-            requestAnimationFrame(animate);
-
-    }
-
-
-    /* =====================================================
-       MOUSE MOVE
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mousemove",
-        function (event) {
-
-            const rect =
-                comparison.getBoundingClientRect();
-
-
-            const position =
-                ((event.clientX - rect.left)
-                / rect.width) * 100;
-
-
-            setPosition(position);
-
-        }
-    );
-
-
-    /* =====================================================
-       MOUSE ENTER
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mouseenter",
-        function (event) {
-
-            const rect =
-                comparison.getBoundingClientRect();
-
-
-            const position =
-                ((event.clientX - rect.left)
-                / rect.width) * 100;
-
-
-            setPosition(position);
-
-        }
-    );
-
-
-    /* =====================================================
-       MOUSE LEAVE
-    ===================================================== */
-
-    comparison.addEventListener(
-        "mouseleave",
-        function () {
-
-            /*
-             * Return smoothly to center
-             */
-
-            setPosition(50);
-
-        }
-    );
-
-
-    /* =====================================================
-       TOUCH
-    ===================================================== */
-
-    comparison.addEventListener(
-        "touchstart",
-        function (event) {
-
-            if (!event.touches.length) {
-                return;
-            }
-
-
-            const rect =
-                comparison.getBoundingClientRect();
-
-
-            const position =
-                ((event.touches[0].clientX - rect.left)
-                / rect.width) * 100;
-
-
-            setPosition(position);
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    comparison.addEventListener(
-        "touchmove",
-        function (event) {
-
-            if (!event.touches.length) {
-                return;
-            }
-
-
-            const rect =
-                comparison.getBoundingClientRect();
-
-
-            const position =
-                ((event.touches[0].clientX - rect.left)
-                / rect.width) * 100;
-
-
-            setPosition(position);
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    /* =====================================================
-       INITIAL POSITION
-    ===================================================== */
-
-    after.style.width = "50%";
-
-    divider.style.left = "50%";
-
-
-    /* Start animation */
-
-    animate();
-
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const comparison =
-        document.getElementById("baComparison");
-
-    const after =
-        document.getElementById("baAfter");
-
-    const divider =
-        document.getElementById("baDivider");
-
-
-    if (!comparison || !after || !divider) {
-        return;
-    }
-
-
-    let targetPosition = 50;
-
-    let currentPosition = 50;
-
-    let animationStarted = false;
-
-
-    /* =====================================================
-       LIMIT VALUE
+       CLAMP
     ===================================================== */
 
     function clamp(value, min, max) {
@@ -406,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       GET CURSOR POSITION
+       GET POSITION
     ===================================================== */
 
     function getPosition(clientX) {
@@ -414,10 +196,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const rect =
             comparison.getBoundingClientRect();
 
+        if (!rect.width) {
+            return 50;
+        }
 
-        let position =
+        const position =
             ((clientX - rect.left) / rect.width) * 100;
-
 
         return clamp(position, 0, 100);
 
@@ -425,16 +209,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       SET TARGET POSITION
+       SET TARGET
     ===================================================== */
 
     function setPosition(position) {
 
-        targetPosition = clamp(
-            position,
-            0,
-            100
-        );
+        targetPosition =
+            clamp(position, 0, 100);
 
     }
 
@@ -449,17 +230,9 @@ document.addEventListener("DOMContentLoaded", function () {
             targetPosition - currentPosition;
 
 
-        /*
-         * Smooth follow effect.
-         */
-
         currentPosition +=
-            difference * 0.14;
+            difference * 0.16;
 
-
-        /*
-         * Stop tiny floating-point movement.
-         */
 
         if (Math.abs(difference) < 0.01) {
 
@@ -470,7 +243,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /*
-         * Update CSS variable.
+         * IMPORTANT:
+         * Only update CSS variable.
+         *
+         * DO NOT change image width.
          */
 
         comparison.style.setProperty(
@@ -492,11 +268,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "mousemove",
         function (event) {
 
-            const position =
-                getPosition(event.clientX);
-
-
-            setPosition(position);
+            setPosition(
+                getPosition(event.clientX)
+            );
 
         }
     );
@@ -510,11 +284,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "mouseenter",
         function (event) {
 
-            const position =
-                getPosition(event.clientX);
-
-
-            setPosition(position);
+            setPosition(
+                getPosition(event.clientX)
+            );
 
         }
     );
@@ -522,16 +294,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        MOUSE LEAVE
+       RETURN TO EXACT CENTER
     ===================================================== */
 
     comparison.addEventListener(
         "mouseleave",
         function () {
-
-            /*
-             * Automatically return
-             * to the center.
-             */
 
             setPosition(50);
 
@@ -551,14 +319,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
-            const position =
+            setPosition(
                 getPosition(
                     event.touches[0].clientX
-                );
-
-
-            setPosition(position);
+                )
+            );
 
         },
         {
@@ -579,14 +344,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
-            const position =
+            setPosition(
                 getPosition(
                     event.touches[0].clientX
-                );
-
-
-            setPosition(position);
+                )
+            );
 
         },
         {
@@ -595,6 +357,13 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
+    /* =====================================================
+       INITIAL POSITION
+       ALWAYS 50 / 50
+    ===================================================== */
+
+    currentPosition = 50;
+    targetPosition = 50;
 
     comparison.style.setProperty(
         "--position",
@@ -602,16 +371,10 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    /*
-     * Start only once.
-     */
+    /* =====================================================
+       START
+    ===================================================== */
 
-    if (!animationStarted) {
-
-        animationStarted = true;
-
-        animate();
-
-    }
+    requestAnimationFrame(animate);
 
 });
