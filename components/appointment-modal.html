@@ -1,0 +1,421 @@
+<link rel="icon"
+      type="image/png"
+      href="assets/icons/favicon.png">
+<div
+    class="appointment-modal"
+    id="appointmentModal"
+    aria-hidden="true">
+
+    <div class="appointment-overlay"
+         data-close-appointment></div>
+
+
+    <div
+        class="appointment-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="appointmentTitle">
+
+
+        <!-- Close -->
+        <button
+            type="button"
+            class="appointment-close"
+            data-close-appointment
+            aria-label="Close appointment form">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <!-- Left Information -->
+        <div class="appointment-info">
+
+            <span class="eyebrow">
+                PRIVATE CONSULTATION
+            </span>
+
+            <h2 id="appointmentTitle">
+                Your skin deserves
+                thoughtful care.
+            </h2>
+
+            <p>
+                Book a consultation with our dermatology
+                team and take the first step toward healthier,
+                more confident skin.
+            </p>
+
+
+            <div class="appointment-benefits">
+
+                <div class="appointment-benefit">
+
+                    <span class="benefit-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </span>
+
+                    <div>
+                        <strong>
+                            Expert Dermatologists
+                        </strong>
+
+                        <small>
+                            Personalized clinical assessment
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="appointment-benefit">
+
+                    <span class="benefit-icon">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </span>
+
+                    <div>
+                        <strong>
+                            Personalized Care
+                        </strong>
+
+                        <small>
+                            Treatment designed around you
+                        </small>
+                    </div>
+
+                </div>
+
+
+                <div class="appointment-benefit">
+
+                    <span class="benefit-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </span>
+
+                    <div>
+                        <strong>
+                            Flexible Appointments
+                        </strong>
+
+                        <small>
+                            Choose a convenient date and time
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Form -->
+        <div class="appointment-form-wrapper">
+
+            <form
+                id="appointmentForm"
+                class="appointment-form"
+                novalidate>
+
+
+                <div class="form-heading">
+
+                    <span class="eyebrow">
+                        BOOK APPOINTMENT
+                    </span>
+
+                    <h3>
+                        Tell us how we can help
+                    </h3>
+
+                </div>
+
+
+                <!-- Name -->
+                <div class="form-group">
+
+                    <label for="appointmentName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="appointmentName"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required>
+
+                    <span
+                        class="form-error"
+                        data-error-for="appointmentName">
+                    </span>
+
+                </div>
+
+
+                <!-- Phone + Email -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="appointmentPhone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="appointmentPhone"
+                            name="phone"
+                            placeholder="+91 94087 82780
++91 81288 53062"
+                            autocomplete="tel"
+                            required>
+
+                        <span
+                            class="form-error"
+                            data-error-for="appointmentPhone">
+                        </span>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="appointmentEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="appointmentEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email">
+
+                    </div>
+
+                </div>
+
+
+                <!-- Treatment -->
+                <div class="form-group">
+
+                    <label for="appointmentTreatment">
+                        Treatment
+                    </label>
+
+                    <select
+                        id="appointmentTreatment"
+                        name="treatment"
+                        required>
+
+                        <option value="">
+                            Select treatment
+                        </option>
+
+                        <option value="acne">
+                            Acne &amp; Acne Scarring
+                        </option>
+
+                        <option value="pigmentation">
+                            Pigmentation &amp; Uneven Tone
+                        </option>
+
+                        <option value="anti-aging">
+                            Skin Rejuvenation
+                        </option>
+
+                        <option value="hair">
+                            Hair &amp; Scalp
+                        </option>
+
+                        <option value="general">
+                            General Dermatology
+                        </option>
+
+                    </select>
+
+                    <span
+                        class="form-error"
+                        data-error-for="appointmentTreatment">
+                    </span>
+
+                </div>
+
+
+                <!-- Date + Time -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="appointmentDate">
+                            Preferred Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="appointmentDate"
+                            name="date"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="appointmentTime">
+                            Preferred Time
+                        </label>
+
+                        <select
+                            id="appointmentTime"
+                            name="time"
+                            required>
+
+                            <option value="">
+                                Select time
+                            </option>
+
+                            <option value="10:00">
+                                10:00 AM
+                            </option>
+
+                            <option value="10:30">
+                                10:30 AM
+                            </option>
+
+                            <option value="11:00">
+                                11:00 AM
+                            </option>
+
+                            <option value="11:30">
+                                11:30 AM
+                            </option>
+
+                            <option value="12:00">
+                                12:00 PM
+                            </option>
+
+                            <option value="04:00">
+                                04:00 PM
+                            </option>
+
+                            <option value="04:30">
+                                04:30 PM
+                            </option>
+
+                            <option value="05:00">
+                                05:00 PM
+                            </option>
+
+                            <option value="05:30">
+                                05:30 PM
+                            </option>
+
+                            <option value="06:00">
+                                06:00 PM
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Message -->
+                <div class="form-group">
+
+                    <label for="appointmentMessage">
+                        Additional Notes
+                        <span>(Optional)</span>
+                    </label>
+
+                    <textarea
+                        id="appointmentMessage"
+                        name="message"
+                        rows="3"
+                        placeholder="Tell us briefly about your concern..."></textarea>
+
+                </div>
+
+
+                <!-- Consent -->
+                <label class="appointment-consent">
+
+                    <input
+                        type="checkbox"
+                        id="appointmentConsent"
+                        required>
+
+                    <span>
+                        I agree to be contacted regarding
+                        my appointment request.
+                    </span>
+
+                </label>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    class="appointment-submit">
+
+                    <span>
+                        Request Appointment
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+
+                <p class="appointment-note">
+                    Your information is kept private and
+                    used only for appointment communication.
+                </p>
+
+            </form>
+
+
+            <!-- Success -->
+            <div
+                class="appointment-success"
+                id="appointmentSuccess"
+                hidden>
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+                <h3>
+                    Appointment Request Received
+                </h3>
+
+                <p>
+                    Thank you. Our clinic team will contact
+                    you shortly to confirm your appointment.
+                </p>
+
+                <button
+                    type="button"
+                    class="success-close"
+                    data-close-appointment>
+
+                    Close
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
